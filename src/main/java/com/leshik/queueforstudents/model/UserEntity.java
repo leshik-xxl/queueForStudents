@@ -1,7 +1,6 @@
 package com.leshik.queueforstudents.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,8 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-public class User {
-
+public class UserEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +21,13 @@ public class User {
     @Column(name = "login", unique = true)
     private String login;
 
-    public User() {
+    @OneToOne(mappedBy = "user")
+    private QueueEntity queue;
 
+    public UserEntity() {
     }
 
-    public User(@NonNull String login) {
+    public UserEntity(String login) {
         this.login = login;
     }
 
@@ -35,7 +35,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        UserEntity user = (UserEntity) o;
         return Objects.equals(id, user.id) && Objects.equals(login, user.login);
     }
 
