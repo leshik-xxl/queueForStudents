@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthenticationController extends BaseController {
+public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
