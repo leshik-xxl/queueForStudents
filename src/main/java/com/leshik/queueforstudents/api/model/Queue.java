@@ -1,4 +1,4 @@
-package com.leshik.queueforstudents.api.response;
+package com.leshik.queueforstudents.api.model;
 
 import lombok.*;
 

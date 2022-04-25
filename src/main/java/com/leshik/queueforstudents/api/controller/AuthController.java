@@ -1,8 +1,7 @@
 package com.leshik.queueforstudents.api.controller;
 
 
-import com.leshik.queueforstudents.api.request.LoginRequest;
-import com.leshik.queueforstudents.api.response.LoginResponse;
+import com.leshik.queueforstudents.api.model.UserName;
 import com.leshik.queueforstudents.model.UserEntity;
 import com.leshik.queueforstudents.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthController {
 
+    private final AuthenticationService authenticationService;
+
     @Autowired
-    private AuthenticationService authenticationService;
+    public AuthController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
 
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-        UserEntity user = authenticationService.login(loginRequest.getLogin());
-        return new LoginResponse(user);
+    public UserName login(@RequestBody UserName request) {
+        UserEntity user = authenticationService.login(request.getUserName());
+        return new UserName(user);
     }
 
     @PostMapping("/logout")
-    public void logout(@RequestBody LoginRequest loginRequest) {
-        authenticationService.logout(loginRequest.getLogin());
+    public UserName logout(@RequestBody UserName request) {
+       return new UserName(authenticationService.logout(request.getUserName()));
     }
 }

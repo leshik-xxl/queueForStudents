@@ -1,6 +1,6 @@
 package com.leshik.queueforstudents.api.controller;
 
-import com.leshik.queueforstudents.api.response.Queue;
+import com.leshik.queueforstudents.api.model.Queue;
 import com.leshik.queueforstudents.service.QueueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

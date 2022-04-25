@@ -1,6 +1,7 @@
 package com.leshik.queueforstudents.service.impl;
 
-import com.leshik.queueforstudents.api.response.Queue;
+import com.leshik.queueforstudents.api.model.Queue;
+import com.leshik.queueforstudents.exeption.NotFoundUserException;
 import com.leshik.queueforstudents.model.QueueEntity;
 import com.leshik.queueforstudents.model.UserEntity;
 import com.leshik.queueforstudents.repository.QueueRepository;
@@ -32,13 +33,14 @@ public class QueueServiceImpl implements QueueService {
             long ordinal = 1;
         };
         return queueRepository.findAllByOrderByEntryTime().stream()
-                .map(x -> new Queue(wrapper.ordinal++, x.getUser().getLogin())).collect(Collectors.toList());
+                .map(x -> new Queue(wrapper.ordinal++, x.getUser().getUserName()))
+                .collect(Collectors.toList());
     }
 
     @Transactional
     @Override
     public void takeTheQueue(String userName) {
-        UserEntity user = userRepository.findByLogin(userName).orElseThrow(RuntimeException::new);
+        UserEntity user = userRepository.findByUserName(userName).orElseThrow(() -> new NotFoundUserException(userName));
         queueRepository.save(new QueueEntity(user));
     }
 

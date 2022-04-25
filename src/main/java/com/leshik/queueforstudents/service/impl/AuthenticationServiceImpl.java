@@ -1,6 +1,6 @@
 package com.leshik.queueforstudents.service.impl;
 
-import com.leshik.queueforstudents.exeption.ExistingLoginException;
+import com.leshik.queueforstudents.exeption.ExistingUserNameException;
 import com.leshik.queueforstudents.model.UserEntity;
 import com.leshik.queueforstudents.repository.UserRepository;
 import com.leshik.queueforstudents.service.AuthenticationService;
@@ -21,18 +21,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Transactional
     @Override
-    public UserEntity login(String user) throws ExistingLoginException {
-        Optional<UserEntity> foundUser = userRepository.findByLogin(user);
+    public UserEntity login(String userName) throws ExistingUserNameException {
+        Optional<UserEntity> foundUser = userRepository.findByUserName(userName);
         if (foundUser.isPresent()) {
-            throw new ExistingLoginException(new UserEntity(user));
+            throw new ExistingUserNameException(foundUser.get());
         } else {
-            return userRepository.save(new UserEntity(user));
+            return userRepository.save(new UserEntity(userName));
         }
     }
 
     @Transactional
     @Override
-    public void logout(String user) {
-        userRepository.deleteByLogin(user);
+    public UserEntity logout(String userName) {
+        userRepository.deleteByUserName(userName);
+        return new UserEntity(userName);
     }
 }

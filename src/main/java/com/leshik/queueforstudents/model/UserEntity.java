@@ -18,8 +18,8 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "login", unique = true)
-    private String login;
+    @Column(name = "user_name", unique = true)
+    private String userName;
 
     @OneToOne(mappedBy = "user")
     private QueueEntity queue;
@@ -27,8 +27,8 @@ public class UserEntity {
     public UserEntity() {
     }
 
-    public UserEntity(String login) {
-        this.login = login;
+    public UserEntity(String userName) {
+        this.userName = userName;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity user = (UserEntity) o;
-        return Objects.equals(id, user.id) && Objects.equals(login, user.login);
+        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login);
+        return Objects.hash(id, userName);
     }
 }

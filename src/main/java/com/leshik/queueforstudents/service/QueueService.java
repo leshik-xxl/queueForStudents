@@ -1,6 +1,6 @@
 package com.leshik.queueforstudents.service;
 
-import com.leshik.queueforstudents.api.response.Queue;
+import com.leshik.queueforstudents.api.model.Queue;
 
 import java.util.List;
 

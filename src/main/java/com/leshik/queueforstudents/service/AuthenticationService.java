@@ -1,9 +1,9 @@
 package com.leshik.queueforstudents.service;
 
-import com.leshik.queueforstudents.exeption.ExistingLoginException;
+import com.leshik.queueforstudents.exeption.ExistingUserNameException;
 import com.leshik.queueforstudents.model.UserEntity;
 
 public interface AuthenticationService {
-    UserEntity login(String user) throws ExistingLoginException;
-    void logout(String user);
+    UserEntity login(String userName) throws ExistingUserNameException;
+    UserEntity logout(String userName);
 }
