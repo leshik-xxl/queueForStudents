@@ -17,10 +17,9 @@ public class QueueController {
         this.queueService = queueService;
     }
 
-    @GetMapping("/take")
-    public List<Queue> takeTheQueue(String userName) {
+    @GetMapping("/app/take")
+    public void takeTheQueue(String userName) {
         queueService.takeTheQueue(userName);
-        return queueService.getAllQueueList();
     }
 
     @GetMapping("/leave")
@@ -29,8 +28,8 @@ public class QueueController {
         return queueService.getAllQueueList();
     }
 
-    @GetMapping("/queue")
-    public List<Queue> getQueue() {
-        return queueService.getAllQueueList();
-    }
+//    @GetMapping("/queue")
+//    public List<Queue> getQueue() {
+//        return queueService.getAllQueueList();
+//    }
 }

@@ -30,7 +30,7 @@ public class QueueEntity {
 
     @OneToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", unique = true)
     private UserEntity user;
 
     public QueueEntity() {
