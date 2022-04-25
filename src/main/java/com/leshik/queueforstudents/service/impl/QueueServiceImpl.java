@@ -47,6 +47,6 @@ public class QueueServiceImpl implements QueueService {
     @Transactional
     @Override
     public void leaveTheQueue(String userName) {
-        queueRepository.deleteByUser_Login(userName);
+        queueRepository.deleteByUser_UserName(userName);
     }
 }
