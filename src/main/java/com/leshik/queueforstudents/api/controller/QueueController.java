@@ -17,19 +17,14 @@ public class QueueController {
         this.queueService = queueService;
     }
 
-    @GetMapping("/app/take")
-    public void takeTheQueue(String userName) {
-        queueService.takeTheQueue(userName);
-    }
-
-    @GetMapping("/leave")
-    public List<Queue> leaveTheQueue(String userName) {
-        queueService.leaveTheQueue(userName);
+    @GetMapping("/action")
+    public List<Queue> actionOnQueue(String userName) {
+        queueService.actionOnQueue(userName);
         return queueService.getAllQueueList();
     }
 
-//    @GetMapping("/queue")
-//    public List<Queue> getQueue() {
-//        return queueService.getAllQueueList();
-//    }
+    @GetMapping("/queue")
+    public List<Queue> getQueue() {
+        return queueService.getAllQueueList();
+    }
 }

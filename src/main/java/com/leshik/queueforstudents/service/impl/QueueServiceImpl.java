@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,14 +40,13 @@ public class QueueServiceImpl implements QueueService {
 
     @Transactional
     @Override
-    public void takeTheQueue(String userName) {
+    public void actionOnQueue(String userName) {
         UserEntity user = userRepository.findByUserName(userName).orElseThrow(() -> new NotFoundUserException(userName));
-        queueRepository.save(new QueueEntity(user));
-    }
-
-    @Transactional
-    @Override
-    public void leaveTheQueue(String userName) {
-        queueRepository.deleteByUser_UserName(userName);
+        Optional<QueueEntity> queue = queueRepository.findByUser(user);
+        if (queue.isPresent()) {
+            queueRepository.deleteByUser_UserName(userName);
+        } else {
+            queueRepository.save(new QueueEntity(user));
+        }
     }
 }
